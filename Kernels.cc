@@ -96,6 +96,18 @@ Tensor_t MatrixMultiply(Tensor_t A, Tensor_t B){
 
 }
 
+Tensor_t Transpose(Tensor_t A){
+    Tensor_t Output(A.cols, A.rows);
+
+    for(int i = 0; i < A.rows; i++){
+        for(int j = 0; j < A.cols; j++){
+            Output.data[j* A.rows + i] = A.data[i*A.cols + j];
+        }
+    }
+
+    return Output;
+}
+
 
 int main(int argc, char** argv){
 
@@ -134,6 +146,9 @@ int main(int argc, char** argv){
     B.print();
 
     AxB.print();
+
+    Tensor_t AxBt = Transpose(AxB);
+    AxBt.print();
 
 
 
