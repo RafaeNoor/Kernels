@@ -108,6 +108,29 @@ Tensor_t Transpose(Tensor_t A){
     return Output;
 }
 
+// Output[i,j] = A[i,j] + Output[i-1,j] + Output[i,j-1]
+Tensor_t PrefixSum2D(Tensor_t A) {
+    Tensor_t Sum(A.rows, A.cols);
+
+    Sum.data[0] = A.data[0];
+    // Sum first row
+    for (int i = 1; i < A.cols; i++)
+      Sum.data[i] = A.data[i] + Sum.data[i - 1];
+
+    // Sum first column
+    for (int i = 1; i < A.rows; i++)
+      Sum.data[i*A.cols] = A.data[i*A.cols] + Sum.data[(i - 1)*A.cols];
+
+    for(int i = 1; i < A.rows; i++){
+        for(int j = 1; j < A.cols; j++){
+            Sum.data[i*A.cols + j] = A.data[i*A.cols + j];
+            Sum.data[i*A.cols + j] += Sum.data[i*A.cols + j - 1];
+            Sum.data[i*A.cols + j] += Sum.data[(i - 1)*A.cols + j];
+        }
+    }
+
+    return Sum;
+}
 
 int main(int argc, char** argv){
 
@@ -150,8 +173,8 @@ int main(int argc, char** argv){
     Tensor_t AxBt = Transpose(AxB);
     AxBt.print();
 
-
-
+    Tensor_t ASum = PrefixSum2D(A);
+    ASum.print();
 
     return 0;
 }
