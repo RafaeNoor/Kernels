@@ -51,8 +51,7 @@ Again, make sure to document your thought process; explain how and why a kernel
 can be parallelized, even if you're not able to implement the parallelism we
 want to see evidence that you've thought about it.
 
-**This assignment is due by Midnight (in Urbana, IL) on Sunday, March 13,
-2022.**
+**This assignment is due by Midnight (in Urbana, IL) 10 days from when you recieve it.**
 
 Directions for submitting this assignment, and for who to contact if you have
 difficulties, were provided in the email.
